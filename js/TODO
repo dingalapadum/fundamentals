@@ -1,0 +1,18 @@
+- variables
+- primitive Datatypes
+- Objects
+- Arrays, Indexed collections
+- Keyed collections
+- const
+- shorthand properties
+- object enhancements
+- spread operator
+- destructuring
+- import and export
+- Array.from()
+- promises
+- Parameter object destructuring with required values
+- rest parameters
+- this
+- DOM
+
