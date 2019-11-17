@@ -252,8 +252,6 @@ Example super POM
 
 </details>  
 
-</br>
-
 <details>
 <summary>
 Apart from the project declaration (GAV) some other important top-level sections of the pom.xml exist, like: dependencies, repositories, pluginRepositories and build 
@@ -403,8 +401,6 @@ Here an example of a bit a larger pom.xml without repositories or pluginReposito
 
 </details>
 
-</br>
-
 <details>
 <summary>
 If the configuration details are not specified, Maven will use their defaults. 
@@ -420,9 +416,9 @@ Apar from the Super-POM, maybe your project also inherits the pom from some pare
 This means, that in the end, within the project you are working on, a lot of things might be set without you being aware of it and can't be found within the ``pom.xml`` of your project. But maybe at some point you want to be able to see, what does the 'final' pom which get's applied to your project look like - with all the inherited stuff and everything else in it: this 'final' pom is what is called the effective pom.
 
 You can see what the effective pom looks like by running:
-
+```
 mvn help:effective-pom
-
+```
 </details>
 
 
