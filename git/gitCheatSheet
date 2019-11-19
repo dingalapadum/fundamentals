@@ -1,0 +1,85 @@
+GIT CHEATSHEET
+--------------
+
+# set git user.name and email:
+git config --global user.name "Your Name Comes Here"
+git config --global user.email you@yourdomain.example.com
+
+# see git variable
+git config user.name
+git config --list # see all git variables
+
+# Initalize git repository
+git init
+# You will get a folder .git/
+
+# dicard local changes to a file
+git checkout file
+
+# add files to index:
+git add file1 file2 file3
+git add . # add all files that changed
+
+# remove a file from the index:
+git reset file
+git reset # remove all files from index
+# will not revert the changes!
+
+# see what is in the index (staged) and what is unstaged
+git status
+
+# store content of the index:
+git commit
+git commit -m "some commit message"
+
+# commit message
+# first line is the commit message
+# blank line then complete description of the commit
+
+# see diffs:
+git diff --cached # (same as --staged) index vs repo (what would be commited)
+git diff # current state vs index
+git diff <commit-hash> # <commit-hash> vs current state
+git diff <commit-hash-1> <commit-hash-2> # <commit-hash-1> vs <commit-hash-2>
+
+# inspect commit
+git show <commit-hash>
+
+# use HEAD~<nr> instead of commit hash
+# HEAD~<nr> refers to the commit <nr> of commits back, i.e. HEAD~0 is last commit and HEAD~3 is the commit 4 commits back
+
+# view history of the changes
+git log
+git log --pretty=oneline
+git log --pretty=format:"%h - %an, %ar : %s"
+git log --pretty=format:"%h %s" --graph
+# %h hash
+# %s subject
+
+# see complete diffs at each step
+git log -p
+
+# see content of specific commit
+git show <hash>
+
+# see content of last commit
+git show HEAD
+
+# show commit before last commit
+git show HEAD~1
+
+# undo last commit
+git reset HEAD~
+
+# accept changes from master
+git rebase master
+
+# change commit message of last commit:
+git commit --amend
+
+# change commit message of old commit:
+git rebase -i HEAD~4
+# assumig you want to edit one of the last 4 commit-messages
+# follow instructions which then appear:
+# change "pick" to "reword". Save -> you will be prompted to change
+# the message of that committ 
