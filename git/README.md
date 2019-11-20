@@ -1,41 +1,70 @@
-GIT CHEATSHEET
---------------
+# GIT CHEATSHEET
 
-# set git user.name and email:
-git config --global user.name "Your Name Comes Here"
-git config --global user.email you@yourdomain.example.com
+There are many git-cheatsheets out there - this happens to be the one I wrote. It is supposed to be a mix between a cheatsheet and a tutorial. Just go from top to bottom through it for the 'tutorial' version. You are expected to think along and create, modify, etc. some files in your project as needed for all the tutorial to make sense. Arguments that need to be provided by you are written as ``<arg>``.
 
-# see git variable
-git config user.name
-git config --list # see all git variables
 
-# Initalize git repository
+Git is a version control system (vcs). The purpose of a version control system is to let you track the changes done to a project. It enables us to see who did what and when. The basic unit of change is a _commit_, Commits have some meta-data like an 'id' (a hash), author, etc.. plus the set of changes. A commit  always has a _single parent commit_ (except for the first one which has none of course).
+
+## Initalize git repository
+```
 git init
-# You will get a folder .git/
+# You will get a folder .git/which contains all the data that git uses to function. Among those there is configfile.
+```
 
-# dicard local changes to a file
-git checkout file
+## Configuration
+```
+# Set git user.name and user.email for system wide git-configuration:
+git config --global user.name <yourName>
+git config --global user.email <you@yourdomain.example.com>
 
-# add files to index:
-git add file1 file2 file3
+
+# Replace --global with--localif you want only this repo to be configured (works only if you initialized the repo). 
+# Local config overrides global config
+
+# See git config
+git config user.name
+git config -l 
+# see _all_ git variables. You can also add --local or --global to only
+see the corresponding config - the merge of both configs is applied.
+# This puts these informations into.git/config. You could also write this directly to the file. I suggest you have a look at it.
+```
+
+## Index and committing
+```
+# stage files to index. The 'index' is where you put the files that you wan't to include in your next commit.
+git add <file1> <file2> <file3>
 git add . # add all files that changed
+
+# see what is in the index (staged) and what changes are made but not staged.
+git status
 
 # remove a file from the index:
 git reset file
 git reset # remove all files from index
-# will not revert the changes!
+# will not revert the changes but only unstage (remove from the index)!
 
-# see what is in the index (staged) and what is unstaged
-git status
+# dicard local changes
+git checkout <file>
 
-# store content of the index:
+# store content of the index to a commit:
 git commit
-git commit -m "some commit message"
-
 # commit message
 # first line is the commit message
 # blank line then complete description of the commit
 
+# short version
+git commit -m "some commit message"
+
+# change commit message of last commit:
+git commit --amend
+
+# undo last commit and get the diff back into the index
+git reset HEAD~
+
+```
+
+## Inspecting changes, index and commits
+```
 # see diffs:
 git diff --cached # (same as --staged) index vs repo (what would be commited)
 git diff # current state vs index
@@ -48,7 +77,7 @@ git show <commit-hash>
 # use HEAD~<nr> instead of commit hash
 # HEAD~<nr> refers to the commit <nr> of commits back, i.e. HEAD~0 is last commit and HEAD~3 is the commit 4 commits back
 
-# view history of the changes
+# view history of the commits and some formatting options
 git log
 git log --pretty=oneline
 git log --pretty=format:"%h - %an, %ar : %s"
@@ -67,25 +96,21 @@ git show HEAD
 
 # show commit before last commit
 git show HEAD~1
+```
 
-# undo last commit
-git reset HEAD~
+# TODO: continue here
+Git allows us to have diverge from the 'main chain' with the concept of a _branch_.
 
+```
 # accept changes from master
 git rebase master
-
-# change commit message of last commit:
-git commit --amend
 
 # change commit message of old commit:
 git rebase -i HEAD~4
 # assumig you want to edit one of the last 4 commit-messages
 # follow instructions which then appear:
 # change "pick" to "reword". Save -> you will be prompted to change
-# the message of that committ 
-
-
------------------ Tasks. TODO: reconcile with the above
+# the message of that commit
 
 Branches
 
@@ -145,3 +170,4 @@ git rebase -i HEAD~n
 # save-quit
 # each of the commit-messages marked with 'reword' is opened one after the other
 # rewrite the message and save-quit - the next commit-message will open.
+```
