@@ -26,8 +26,8 @@ git config user.name
 git config -l 
 # see _all_ git variables. You can also add --local or --global to only
 see the corresponding config - the merge of both configs is applied.
-# This puts these informations into.git/config. You could also write this directly to the file. I suggest you have a look at it.
 ```
+Global properties are written to ``~/.gitconfig``. Local properties are stored in ``.git/config``. You could also write directly to these files respectively. I suggest you have a look at it.
 
 ## Index and committing
 ```
@@ -63,7 +63,7 @@ git reset HEAD~
 
 ```
 
-## Inspecting changes, index and commits
+## Inspecting changes and commit history
 ```
 # see diffs:
 git diff --cached # (same as --staged) index vs repo (what would be commited)
@@ -84,11 +84,52 @@ git log --pretty=format:"%h %s" --graph
 # %h hash
 # %s subject
 
+# personally I use
+git log --format='%Cred %h %Cblue %<(12,trunc)%an %cd %Creset %s'
+# and I have an alias for this 'git lg'
+
+# sometimes
+git log --format='%Cred %<(5,trunc)%h %Creset %s %d' --graph --all
+# when I need to see other branches too. (alias 'git lgga')
+
 # see complete diffs at each step 
 git log -p
 
 ```
-alternatively to know the hash, we can use the ``HEAD`` to check commits. The ``HEAD`` is a reference ('a pointer') to the current commit.
+
+## Branches and HEAD
+Git allows us to have diverge from the 'main chain' with the concept of a _branch_. The "main" branch is usually called 'master' (similar to the 'trunk' in svn),
+<details>
+<summary>We usually use a new branch when we want to start with a new change of which we are not sure yet if we want to actually have it on the master. 
+</summary>
+There are different 'philosophies' on how branches should be managed and is a whole topic on its own - won't be discussed here (google for something like 'git workflows' to read more about this).
+</details>
+
+I suggest that you think of branches as a reference (pointers) with some additional meta-info (like where this chain of commits diverged from some other branch). While committing on the branch, this reference will 'move along'.  
+
+```
+# Create a new branch 'local-branch' and switch to it
+git co -b local-branch
+  
+# List all branches
+git branch #local
+git branch -a #all
+  
+# Rename the current branch (locally only)
+git branch -m <oldname> <newname>
+ 
+# Delete branch
+git branch -d <branchToDelete>
+# you are not allowed to delete the branch if it has changes that are not tracked by
+
+# 'force' delete
+git branch -D <branchToDelete> 
+```
+
+
+# TODO: continue here
+
+alternatively to how we said previously on how to check contents of commits, we can use the ``HEAD`` to check commits. The ``HEAD`` is a reference ('a pointer') to the current commit.
 
 ```
 # use HEAD~<nr> instead of commit hash
@@ -109,39 +150,18 @@ git checkout <hash>
 
 ```
 
-Git allows us to have diverge from the 'main chain' with the concept of a _branch_.
-
-# TODO: continue here
-
-
 ```
 # accept changes from master
 git rebase master
 
+
+Modifying old commits
 # change commit message of old commit:
 git rebase -i HEAD~4
 # assumig you want to edit one of the last 4 commit-messages
 # follow instructions which then appear:
 # change "pick" to "reword". Save -> you will be prompted to change
 # the message of that commit
-
-Branches
-
-Create, list, rename:
-# Create a new branch 'local-branch' and switch to it
-git co -b local-branch
-  
-# List all branches
-git branch #local
-git branch -a #all
-  
-# Rename the current branch (locally only)
-git branch -m <oldname> <newname>
- 
-# Delete branch
-git branch -d <branchToDelete>
-git branch -D <branchToDelete> # 'force' delete
-Modifying old commits
 
 Change stuff in an older commit. e.g. wrongly commited target:
 git checkout <hash>  #this will detach your head (i.e. you are not on your branch anymore)
