@@ -46,7 +46,7 @@ git reset # remove all files from index
 # dicard local changes
 git checkout <file>
 
-# store content of the index to a commit:
+# store content of the index to a commit
 git commit
 # commit message
 # first line is the commit message
@@ -71,11 +71,10 @@ git diff # current state vs index
 git diff <commit-hash> # <commit-hash> vs current state
 git diff <commit-hash-1> <commit-hash-2> # <commit-hash-1> vs <commit-hash-2>
 
-# inspect commit
+# inspect commit - a commit us uniquely identifiable by it's hash
 git show <commit-hash>
+# you don't need to provide the entire hash. It suffices to provide enough of the hash to make it uniquely identifiable (usually the first 5 characters should be enough).
 
-# use HEAD~<nr> instead of commit hash
-# HEAD~<nr> refers to the commit <nr> of commits back, i.e. HEAD~0 is last commit and HEAD~3 is the commit 4 commits back
 
 # view history of the commits and some formatting options
 git log
@@ -85,21 +84,35 @@ git log --pretty=format:"%h %s" --graph
 # %h hash
 # %s subject
 
-# see complete diffs at each step
+# see complete diffs at each step 
 git log -p
 
-# see content of specific commit
-git show <hash>
+```
+alternatively to know the hash, we can use the ``HEAD`` to check commits. The ``HEAD`` is a reference ('a pointer') to the current commit.
+
+```
+# use HEAD~<nr> instead of commit hash
+# HEAD~<nr> refers to the commit <nr> of commits back, i.e. HEAD~0 is last commit and HEAD~3 is the commit 4 commits back
 
 # see content of last commit
 git show HEAD
 
 # show commit before last commit
 git show HEAD~1
+# go with HEAD~2, HEAD~3, etc.. to see contents of previous commit
+```
+The ``checkout`` command is overloaded and can also be used to 'jump' to a specific commit
+```
+# jump to a specific commit
+git checkout <hash>
+# This moves the HEAD and makes that the HEAD now points to the commit with id <hash>
+
 ```
 
-# TODO: continue here
 Git allows us to have diverge from the 'main chain' with the concept of a _branch_.
+
+# TODO: continue here
+
 
 ```
 # accept changes from master
