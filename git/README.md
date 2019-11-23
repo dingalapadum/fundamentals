@@ -1,4 +1,4 @@
-# GIT CHEATSHEET
+# GIT CHEATSHEET-TUTORIAL
 
 There are many git-cheatsheets out there - this happens to be the one I wrote. It is supposed to be a mix between a cheatsheet and a tutorial. Just go from top to bottom through it for the 'tutorial' version. You are expected to think along a bit and create, modify, etc. some files in your project as needed for all the tutorial to make sense. It is assumed that you already have git installed. Arguments that need to be provided by you are written as ``<arg>``.
 
@@ -8,7 +8,6 @@ Git is a version control system (vcs). The purpose of a version control system i
 ## Initalize git repository
 ```
     git init
-
 # You will get a folder .git/which contains all the data that git uses to function. Among those there is configfile.
 ```
 
@@ -36,10 +35,9 @@ A basic 'unit of change' is called a ``commit`` - a ``commit`` is a set of chang
 The ``index`` is where we put the files that you want to include in your next commit.
 ```
 # stage files to 'index'.
-    
     git add <file1> <file2> <file3>
     git add . # add all files that changed
-
+    
 # see what is in the index (staged) and what changes are made but not staged. Probably one of the commands I use the most
     git status
 
