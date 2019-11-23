@@ -1,104 +1,104 @@
 # GIT CHEATSHEET
 
-There are many git-cheatsheets out there - this happens to be the one I wrote. It is supposed to be a mix between a cheatsheet and a tutorial. Just go from top to bottom through it for the 'tutorial' version. You are expected to think along a bit and create, modify, etc. some files in your project as needed for all the tutorial to make sense. Arguments that need to be provided by you are written as ``<arg>``.
+There are many git-cheatsheets out there - this happens to be the one I wrote. It is supposed to be a mix between a cheatsheet and a tutorial. Just go from top to bottom through it for the 'tutorial' version. You are expected to think along a bit and create, modify, etc. some files in your project as needed for all the tutorial to make sense. It is assumed that you already have git installed. Arguments that need to be provided by you are written as ``<arg>``.
 
 
-Git is a version control system (vcs). The purpose of a version control system is to let you track the changes done to a project. It enables us to see who did what and when. The basic unit of change is a _commit_, Commits have some meta-data like an 'id' (a hash), author, etc.. plus the set of changes. A commit  always has a _single parent commit_ (except for the first one which has none of course).
+Git is a version control system (vcs). The purpose of a version control system is to let you track the changes done to a project. It enables us to see who did what and when. 
 
 ## Initalize git repository
 ```
-git init
+    git init
+
 # You will get a folder .git/which contains all the data that git uses to function. Among those there is configfile.
 ```
 
 ## Configuration
 ```
 # Set git user.name and user.email for system wide git-configuration:
-git config --global user.name <yourName>
-git config --global user.email <you@yourdomain.example.com>
+    git config --global user.name <yourName>
+    git config --global user.email <you@yourdomain.example.com>
+# Replace --global with--localif you want only this repo to be configured (works only if you initialized the repo). Local config overrides global config
 
+# See git a variable of the config
+    git config user.name
 
-# Replace --global with--localif you want only this repo to be configured (works only if you initialized the repo). 
-# Local config overrides global config
+# see _all_ git variables.
+    git config -l 
 
-# See git config
-git config user.name
-git config -l 
-# see _all_ git variables. You can also add --local or --global to only
-see the corresponding config - the merge of both configs is applied.
+# You can also add --local or --global to only see the corresponding config - the merge of both configs is applied.
 ```
 Global properties are written to ``~/.gitconfig``. Local properties are stored in ``.git/config``. You could also write directly to these files respectively. I encourage you to have a look at them.
 
 ## Index and committing
 
-A 'unit' of change is called a ``commit`` - a ``commit`` is a set of changes, with some meta-data like an id, author a parent-commit to name a few. 
+A basic 'unit of change' is called a ``commit`` - a ``commit`` is a set of changes, with some meta-data like an id, author a parent-commit to name a few. A commit  always has a _single parent commit_ (except for the first one which has none of course).
 
-The index is where we put the files that you want to include in your next commit.
+The ``index`` is where we put the files that you want to include in your next commit.
 ```
 # stage files to 'index'.
-git add <file1> <file2> <file3>
-git add . # add all files that changed
+    
+    git add <file1> <file2> <file3>
+    git add . # add all files that changed
 
-# see what is in the index (staged) and what changes are made but not staged.
-git status
+# see what is in the index (staged) and what changes are made but not staged. Probably one of the commands I use the most
+    git status
 
 # remove a file from the index:
-git reset file
-git reset 
+    git reset file
+    git reset 
 # remove all files from index
 # will not revert the changes but only unstage (remove from the index)
 
-# dicard local changes
-git checkout <file>
+# dicard local changes - i,e, undo changes in <file>
+    git checkout <file>
+
 
 # store content of the index to a commit
-git commit
+    git commit
 # An editor will pop up and you have to provide a commit message:
 # first line is the commit message
 # blank line then complete description of the commit can follow
 
 # short version
-git commit -m "some commit message"
+    git commit -m "some commit message"
 
 # change commit message of last commit:
-git commit --amend
+    git commit --amend
 
 # undo last commit and get the put the changes of that commit back into the index
-git reset HEAD~
-
+    git reset HEAD~
 ```
 
 ## Inspecting changes and commit history
 ```
 # see diffs:
-git diff --cached # (same as --staged) index vs repo (what would be commited)
-git diff # current state vs index
-git diff <commit-hash> # <commit-hash> vs current state
-git diff <commit-hash-1> <commit-hash-2> # <commit-hash-1> vs <commit-hash-2>
+    git diff --cached # (same as --staged) index vs repo (what would be commited)
+    git diff # current state vs index
+    git diff <commit-hash> # <commit-hash> vs current state
+    git diff <commit-hash-1> <commit-hash-2> # <commit-hash-1> vs <commit-hash-2>
 
 # inspect commit - a commit us uniquely identifiable by it's hash
-git show <commit-hash>
+    git show <commit-hash>
 # you don't need to provide the entire hash. It suffices to provide enough of the hash to make it uniquely identifiable (usually the first 5 characters should be enough).
 
 # view history of the commits and some formatting options
-git log
-git log --pretty=oneline
-git log --pretty=format:"%h - %an, %ar : %s"
-git log --pretty=format:"%h %s" --graph
+    git log
+    git log --pretty=oneline
+    git log --pretty=format:"%h - %an, %ar : %s"
+    git log --pretty=format:"%h %s" --graph
 # %h hash
 # %s subject
 
 # personally I use
-git log --format='%Cred %h %Cblue %<(12,trunc)%an %cd %Creset %s'
+    git log --format='%Cred %h %Cblue %<(12,trunc)%an %cd %Creset %s'
 # and I have an alias for this 'git lg'
 
 # sometimes
-git log --format='%Cred %<(5,trunc)%h %Creset %s %d' --graph --all
+    git log --format='%Cred %<(5,trunc)%h %Creset %s %d' --graph --all
 # when I need to see other branches too. (alias 'git lgga')
 
 # see complete diffs at each step 
-git log -p
-
+    git log -p
 ```
 
 ## Branches and HEAD
@@ -109,9 +109,14 @@ Git allows us to have diverge from the 'main chain of development' with the conc
 There are different 'philosophies' on how branches should be managed and is a whole topic on its own - won't be discussed here (google for something like 'git workflows' to read more about this).
 </details>
 
+The ``HEAD`` is a pointer that shows where _we_ currently stand. It follows the branch we are working on and we can use it to reference commits _relative_ to our position.
+
+<details>
+<summary>
+(Expand this if you'd like a more visual explanation of these concepts)
+</summary>
 I suggest that apart from 'a commit-chain diverging from the master', you think of branches as a pointer that references the current chain of development with some additional meta-info (like where this chain of commits diverged from some other branch). While committing on the branch, this reference will 'move along'.
 
-The ``HEAD`` is a pointer that shows where _we_ currently stand. We can use it to reference commits _relative_ to our position.
 
 A picture is worth a thousand words:
 
@@ -141,44 +146,44 @@ Observe the following things in the graph above:
 - The first commit on ``master`` after diverging from the master is ``c23a735``
 - The branch ``master`` currently is at ``a699e57``
 
+</details>
+
 ```
 # Create a new branch 'local-branch' and switch to it
-git checkout -b local-branch
+    git checkout -b local-branch
 
 # List all branches
-git branch #local
-git branch -a #all
+    git branch #local
+    git branch -a #all
 
 # Switch to an existing branch (master in this example)
-git checkout master
+    git checkout master
 
 # Rename the current branch (locally only)
-git branch -m <oldname> <newname>
+    git branch -m <oldname> <newname>
  
 # Delete branch
-git branch -d <branchToDelete>
+    git branch -d <branchToDelete>
 # you are not allowed to delete the branch if it has changes that are not tracked by
 
 # If you still want to delete that branch, you need to 'force' delete it:
-git branch -D <branchToDelete> 
+    git branch -D <branchToDelete> 
 ```
-
-
-# TODO: continue here
-
-As just mentioned, we can use the ``HEAD`` to check commits relative to our current position.
-
+As just mentioned above, we can use the ``HEAD`` to check commits relative to our current position.
 ```
 # use HEAD~<nr> instead of commit hash
 # HEAD~<nr> refers to the commit <nr> of commits back, i.e. HEAD~0 is last commit and HEAD~3 is the commit 4 commits back
 
 # see content of last commit
-git show HEAD
+    git show HEAD
 
 # show commit before last commit
-git show HEAD~1
+    git show HEAD~1
 # go with HEAD~2, HEAD~3, etc.. to see contents of previous commit
 ```
+
+# TODO: continue here
+
 The ``checkout`` command is overloaded and can also be used to 'jump' to a specific commit
 ```
 # jump to a specific commit
