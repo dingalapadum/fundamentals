@@ -1,6 +1,6 @@
 # GIT CHEATSHEET
 
-There are many git-cheatsheets out there - this happens to be the one I wrote. It is supposed to be a mix between a cheatsheet and a tutorial. Just go from top to bottom through it for the 'tutorial' version. You are expected to think along and create, modify, etc. some files in your project as needed for all the tutorial to make sense. Arguments that need to be provided by you are written as ``<arg>``.
+There are many git-cheatsheets out there - this happens to be the one I wrote. It is supposed to be a mix between a cheatsheet and a tutorial. Just go from top to bottom through it for the 'tutorial' version. You are expected to think along a bit and create, modify, etc. some files in your project as needed for all the tutorial to make sense. Arguments that need to be provided by you are written as ``<arg>``.
 
 
 Git is a version control system (vcs). The purpose of a version control system is to let you track the changes done to a project. It enables us to see who did what and when. The basic unit of change is a _commit_, Commits have some meta-data like an 'id' (a hash), author, etc.. plus the set of changes. A commit  always has a _single parent commit_ (except for the first one which has none of course).
@@ -27,11 +27,15 @@ git config -l
 # see _all_ git variables. You can also add --local or --global to only
 see the corresponding config - the merge of both configs is applied.
 ```
-Global properties are written to ``~/.gitconfig``. Local properties are stored in ``.git/config``. You could also write directly to these files respectively. I suggest you have a look at it.
+Global properties are written to ``~/.gitconfig``. Local properties are stored in ``.git/config``. You could also write directly to these files respectively. I encourage you to have a look at them.
 
 ## Index and committing
+
+A 'unit' of change is called a ``commit`` - a ``commit`` is a set of changes, with some meta-data like an id, author a parent-commit to name a few. 
+
+The index is where we put the files that you want to include in your next commit.
 ```
-# stage files to index. The 'index' is where you put the files that you wan't to include in your next commit.
+# stage files to 'index'.
 git add <file1> <file2> <file3>
 git add . # add all files that changed
 
@@ -40,17 +44,18 @@ git status
 
 # remove a file from the index:
 git reset file
-git reset # remove all files from index
-# will not revert the changes but only unstage (remove from the index)!
+git reset 
+# remove all files from index
+# will not revert the changes but only unstage (remove from the index)
 
 # dicard local changes
 git checkout <file>
 
 # store content of the index to a commit
 git commit
-# commit message
+# An editor will pop up and you have to provide a commit message:
 # first line is the commit message
-# blank line then complete description of the commit
+# blank line then complete description of the commit can follow
 
 # short version
 git commit -m "some commit message"
@@ -58,7 +63,7 @@ git commit -m "some commit message"
 # change commit message of last commit:
 git commit --amend
 
-# undo last commit and get the diff back into the index
+# undo last commit and get the put the changes of that commit back into the index
 git reset HEAD~
 
 ```
@@ -74,7 +79,6 @@ git diff <commit-hash-1> <commit-hash-2> # <commit-hash-1> vs <commit-hash-2>
 # inspect commit - a commit us uniquely identifiable by it's hash
 git show <commit-hash>
 # you don't need to provide the entire hash. It suffices to provide enough of the hash to make it uniquely identifiable (usually the first 5 characters should be enough).
-
 
 # view history of the commits and some formatting options
 git log
@@ -98,23 +102,56 @@ git log -p
 ```
 
 ## Branches and HEAD
-Git allows us to have diverge from the 'main chain' with the concept of a _branch_. The "main" branch is usually called 'master' (similar to the 'trunk' in svn),
+Git allows us to have diverge from the 'main chain of development' with the concept of a _branch_. The 'main' branch is usually called 'master' (similar to the 'trunk' in svn),
 <details>
 <summary>We usually use a new branch when we want to start with a new change of which we are not sure yet if we want to actually have it on the master. 
 </summary>
 There are different 'philosophies' on how branches should be managed and is a whole topic on its own - won't be discussed here (google for something like 'git workflows' to read more about this).
 </details>
 
-I suggest that you think of branches as a reference (pointers) with some additional meta-info (like where this chain of commits diverged from some other branch). While committing on the branch, this reference will 'move along'.  
+I suggest that apart from 'a commit-chain diverging from the master', you think of branches as a pointer that references the current chain of development with some additional meta-info (like where this chain of commits diverged from some other branch). While committing on the branch, this reference will 'move along'.
+
+The ``HEAD`` is a pointer that shows where _we_ currently stand. We can use it to reference commits _relative_ to our position.
+
+A picture is worth a thousand words:
+
+\* are commits
+
+```
+* a699e57 (HEAD -> master)
+* 525a8fc
+* c23a735
+| * c433b6f (anotherbranch)
+| * 1815b86
+| * 3252365
+| * 15ddd47
+|/
+* 23f6704
+* 5149ed4
+* 01de1c2
+* b7293c4
+```
+(was produced with: ``git log --format='%h %<(5,trunc) %Creset %d' --graph --all``)
+Observe the following things in the graph above:
+- The commit history goes from bottom to top
+- The branch ``anotherbranch`` diverged from the master after commit ``23f6704``
+- The first commit on ``anotherbranch`` after diverging from the master is ``15ddd47``
+- The branch ``anotherbranch`` currently is at ``c433b6f``
+- The ``HEAD`` currently follows the ``master`` branch.
+- The first commit on ``master`` after diverging from the master is ``c23a735``
+- The branch ``master`` currently is at ``a699e57``
 
 ```
 # Create a new branch 'local-branch' and switch to it
-git co -b local-branch
-  
+git checkout -b local-branch
+
 # List all branches
 git branch #local
 git branch -a #all
-  
+
+# Switch to an existing branch (master in this example)
+git checkout master
+
 # Rename the current branch (locally only)
 git branch -m <oldname> <newname>
  
@@ -122,14 +159,14 @@ git branch -m <oldname> <newname>
 git branch -d <branchToDelete>
 # you are not allowed to delete the branch if it has changes that are not tracked by
 
-# 'force' delete
+# If you still want to delete that branch, you need to 'force' delete it:
 git branch -D <branchToDelete> 
 ```
 
 
 # TODO: continue here
 
-alternatively to how we said previously on how to check contents of commits, we can use the ``HEAD`` to check commits. The ``HEAD`` is a reference ('a pointer') to the current commit.
+As just mentioned, we can use the ``HEAD`` to check commits relative to our current position.
 
 ```
 # use HEAD~<nr> instead of commit hash
