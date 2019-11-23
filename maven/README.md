@@ -410,7 +410,7 @@ One of these default values is the packaging type. Every Maven project has a pac
 
 <details>
 <summary>
-Apar from the Super-POM, maybe your project also inherits the pom from some parent project.
+Apart from the Super-POM, maybe your project also inherits the pom from some parent project. It 'final' pom which is the aggregation of all parent poms and your own pom is called _effective pom_
 </summary> 
 
 This means, that in the end, within the project you are working on, a lot of things might be set without you being aware of it and can't be found within the ``pom.xml`` of your project. But maybe at some point you want to be able to see, what does the 'final' pom which get's applied to your project look like - with all the inherited stuff and everything else in it: this 'final' pom is what is called the effective pom.
