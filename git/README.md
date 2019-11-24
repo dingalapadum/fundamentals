@@ -4,12 +4,14 @@ There are many git-cheatsheets out there - this happens to be the one I wrote. I
 
 
 Git is a version control system (vcs). The purpose of a version control system is to let you track the changes done to a project. It enables us to see who did what and when. 
+<hr>
 
 ## Initalize git repository
 ```
     git init
 # You will get a folder .git/which contains all the data that git uses to function. Among those there is configfile.
 ```
+<hr>
 
 ## Configuration
 ```
@@ -27,6 +29,7 @@ Git is a version control system (vcs). The purpose of a version control system i
 # You can also add --local or --global to only see the corresponding config - the merge of both configs is applied.
 ```
 Global properties are written to ``~/.gitconfig``. Local properties are stored in ``.git/config``. You could also write directly to these files respectively. I encourage you to have a look at them.
+<hr>
 
 ## Index and committing
 
@@ -66,6 +69,7 @@ The ``index`` is where we put the files that you want to include in your next co
 # undo last commit and get the put the changes of that commit back into the index
     git reset HEAD~
 ```
+<hr>
 
 ## Inspecting changes and commit history
 ```
@@ -99,20 +103,20 @@ The ``index`` is where we put the files that you want to include in your next co
     git log -p
 ```
 
+<hr>
+
 ## Branches and HEAD
-Git allows us to have diverge from the 'main chain of development' with the concept of a _branch_. The 'main' branch is usually called 'master' (similar to the 'trunk' in svn),
-<details>
-<summary>We usually use a new branch when we want to start with a new change of which we are not sure yet if we want to actually have it on the master. 
-</summary>
-There are different 'philosophies' on how branches should be managed and is a whole topic on its own - won't be discussed here (google for something like 'git workflows' to read more about this).
-</details>
-
-The ``HEAD`` is a pointer that shows where _we_ currently stand. It follows the branch we are working on and we can use it to reference commits _relative_ to our position.
-
+Git allows us to have diverge from the 'main chain of development' with the concept of a _branch_.
 <details>
 <summary>
-(Expand this if you'd like a more visual explanation of these concepts)
+Expand this for some addtional information on branches
 </summary>
+<hr>
+The 'main' branch is usually called 'master' (similar to the 'trunk' in svn),
+We usually use a new branch when we want to start with a new change of which we are not sure yet if we want to actually have it on the master. 
+
+There are different 'philosophies' on how branches should be managed and is a whole topic on its own - won't be discussed here (google for something like 'git workflows' to read more about this).
+
 I suggest that apart from 'a commit-chain diverging from the master', you think of branches as a pointer that references the current chain of development with some additional meta-info (like where this chain of commits diverged from some other branch). While committing on the branch, this reference will 'move along'.
 
 
@@ -143,12 +147,13 @@ Observe the following things in the graph above:
 - The ``HEAD`` currently follows the ``master`` branch.
 - The first commit on ``master`` after diverging from the master is ``c23a735``
 - The branch ``master`` currently is at ``a699e57``
-
+<hr>
 </details>
 
 ```
-# Create a new branch 'local-branch' and switch to it
+# Create a new branch 'local-branch' and switch to it.
     git checkout -b local-branch
+# At this point the branch will point to the current commit your HEAD was pointing to
 
 # List all branches
     git branch #local
@@ -167,7 +172,18 @@ Observe the following things in the graph above:
 # If you still want to delete that branch, you need to 'force' delete it:
     git branch -D <branchToDelete> 
 ```
-As just mentioned above, we can use the ``HEAD`` to check commits relative to our current position.
+The ``HEAD`` is a pointer that references the commit where we _currently_  at and thereby defines the parent of our next commit. 
+
+<details>
+<summary>
+Expand this for some addtional information on HEAD
+</summary>
+
+After commiting, the ``HEAD`` will move along and reference the new commit.
+The ``HEAD`` follows (is attached to) the branch we are working on and we can use it to reference commits _relative_ to our current position. It is also possibke to detach the ``HEAD`` from any branch and creating the branch later.
+</details>
+
+
 ```
 # use HEAD~<nr> instead of commit hash
 # HEAD~<nr> refers to the commit <nr> of commits back, i.e. HEAD~0 is last commit and HEAD~3 is the commit 4 commits back
@@ -180,15 +196,18 @@ As just mentioned above, we can use the ``HEAD`` to check commits relative to ou
 # go with HEAD~2, HEAD~3, etc.. to see contents of previous commit
 ```
 
-# TODO: continue here
-
 The ``checkout`` command is overloaded and can also be used to 'jump' to a specific commit
 ```
 # jump to a specific commit
-git checkout <hash>
-# This moves the HEAD and makes that the HEAD now points to the commit with id <hash>
-
+    git checkout <hash>
+# This moves the HEAD and makes that the HEAD now points to the commit with id <hash>. This detaches the HEAD from the branch you were working on. If you commit now, these changes won't be tracked by any branch - but you are free to know create a new branch from here
 ```
+
+<hr>
+
+# TODO: continue here
+
+
 
 ```
 # accept changes from master
