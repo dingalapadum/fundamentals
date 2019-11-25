@@ -202,19 +202,43 @@ The ``checkout`` command is overloaded and can also be used to 'jump' to a speci
     git checkout <hash>
 # This moves the HEAD and makes that the HEAD now points to the commit with id <hash>. This detaches the HEAD from the branch you were working on. If you commit now, these changes won't be tracked by any branch - but you are free to know create a new branch from here
 ```
-
 <hr>
 
-# TODO: continue here
 
+# Random selection of recurring Tasks
 
+The remainder of this inroduction is not so much a tutorial anymore, but rather a collection of some recurring tasks I found myself googling for over and over again - this is the part which is more cheatsheet than tutorial
+
+## Accepting changes from the master ("updating your branch")
+So you are working on some feature-branch and you know what to get the changes from master into your branch without a merge commit, but basically moving the diverging commit to the top of master - this will then allow to merge your pull-request into master via fast-forward
 
 ```
 # accept changes from master
-git rebase master
+    git chechout master
+    git pull
+    git checkout <your-feature-branch>
+    git rebase master
+```
+
+You might get conflicts during this step. You basically will need to solve the conflict (i.e. put the conflicting files in the state you want to have in the end), and continue rebasing (you should see some instructions in the terminal if this happens).
+
+## Manipulating (old) commits
+
+Every now and then I want to make a change in a commit I already did (maybe change the message or add another file or make a modification in antoher way than what I did in that commit). Or sometime simply discard old commits alltogether.
+
+```
+# uncommit last 4 commits but keep changes staged
+git reset --soft HEAD~4
+
+# uncommit last commit and discard all the changes
+git reset --hard HEAD~
+```
 
 
-Modifying old commits
+# TODO: continue here
+
+```
+
 # change commit message of old commit:
 git rebase -i HEAD~4
 # assumig you want to edit one of the last 4 commit-messages
@@ -240,14 +264,9 @@ git push -f origin <branch-name>
 Go back in the commit history
 # uncommit last 2 commits but keep changes
 git reset HEAD~2
+  
  
- 
-# uncommit last 4 commits but keep changes staged
-git reset --soft HEAD~4
- 
- 
-# uncommit last commit and discard all the changes
-git reset --hard HEAD~
+
 Modifying commit messages
 
 Last commit message
