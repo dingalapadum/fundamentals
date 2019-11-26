@@ -228,57 +228,42 @@ Every now and then I want to make a change in a commit I already did (maybe chan
 
 ```
 # uncommit last 4 commits but keep changes staged
-git reset --soft HEAD~4
+    git reset --soft HEAD~4
 
 # uncommit last commit and discard all the changes
-git reset --hard HEAD~
+    git reset --hard HEAD~
+
+# Rewording, squashing and others: with the command
+    git rebase -i HEAD~4
+# you'll get into a menu showing your last 4 commits
+# you choose which of these commit you want to modify - like editing the commit-message or squashing commits together. 
+# follow instructions which appear in the menu:
+# For instance changing "pick" to "reword", then save -> you will be prompted to change
+# the message of those commits
+# Note that you if want to squash commits, you must "pick" at least one where the other commits will be squashed into.
 ```
-
-
-# TODO: continue here
+## Manipulating the _content_ of (old) commits
 
 ```
-
-# change commit message of old commit:
-git rebase -i HEAD~4
-# assumig you want to edit one of the last 4 commit-messages
-# follow instructions which then appear:
-# change "pick" to "reword". Save -> you will be prompted to change
-# the message of that commit
-
-Change stuff in an older commit. e.g. wrongly commited target:
-git checkout <hash>  #this will detach your head (i.e. you are not on your branch anymore)
+Change stuff in an older commit. In this example wrongly commited target:
+    git checkout <hash>  
+#this will detach your head (i.e. you are not on your branch anymore)
   
-# do some changes: removing target
-git rm -r target
+# do some changes: example removing the folder target
+    git rm -r target
 # add some file
-git add bla.txt
+    git add bla.txt
   
-git commit --amend -m "<definitiv commit message>"
-# git commit --amend if you want to use the same commit message as before
-git rebase --onto HEAD <hash> <branch-name>
+    git commit --amend -m "<definitiv commit message>"
+# omit '-m <...>' if you want to use the same commit message as before
+    git rebase --onto HEAD <hash> <branch-name>
 # the same hash as the one in the beginning
 # branch-name is the one you left when the head got detachted
-  
-git push -f origin <branch-name>
-Go back in the commit history
-# uncommit last 2 commits but keep changes
-git reset HEAD~2
-  
- 
-
-Modifying commit messages
-
-Last commit message
-git commit --amend
-
-Older commit messages
-# to get a list of the last n commits
-git rebase -i HEAD~n
- 
- 
-# then change 'pick' to reword for each of the commit messages you want to change
-# save-quit
-# each of the commit-messages marked with 'reword' is opened one after the other
-# rewrite the message and save-quit - the next commit-message will open.
 ```
+
+# Where to go next
+There are a pletora of other resources to learn more about git out there
+
+- In your terminal type ``man gittutorial`` for a good tutorial which also emphazises more the 'collaboration' part compared to this guide.
+- Google for "git workflows" for more information about different ways to use git in a team
+- Explore the ``.git`` folder and the files in here to get a more in depth understanding of how git keeps track of the current state
