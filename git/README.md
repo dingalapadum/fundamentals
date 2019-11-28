@@ -260,27 +260,57 @@ Change stuff in an older commit. In this example wrongly commited target:
 # the same hash as the one in the beginning
 # branch-name is the one you left when the head got detachted
 ```
+## Aliases
+
+Git allows you to create custom aliases to safe you some typing.
+
+You create an alias with:
+```
+    git config --global alias.st status
+```
+
+After doing this you can just write:
+```
+    git st
+```
+instead of
+```
+    git status
+```
+
+You can see your aliases in your ``.gitconfig`` and of course you can just write them directly in that file. Here are some aliases I how they appear in my ``.gitconfig``:
+
+```
+[alias]
+    # short common commands (these are widely used)
+    alias.co checkout
+    alias.br branch
+    alias.st status
+
+    # different log pretty printers
+    alias.lg log --format='%Cred %h %Cblue %<(12,trunc)%an %cd %Creset %s'
+    alias.lgg log --format='%Cred %h %Cblue %<(12,trunc)%an %Creset %s' --graph
+    alias.lgga log --format='%Cred %<(5,trunc)%h %Creset %s %d' --graph --all
+    alias.lgmf log --name-status --reverse --pretty='%Cred%an %h %s %Cgreen'
+    
+    # like "git diff" but only showing filenames
+    alias.dfiles diff --name-only
+
+    # show all available aliases
+    alias.alias config --get-regexp ^alias\.
+
+    # like "git show" but only
+    alias.showfiles diff-tree --no-commit-id --name-only -r
+```
 
 <hr>
 
-# Where to go next
+# Where to go next, where to get more help
 There are a pletora of other resources to learn more about git out there
 
+- ``git help`` to see some common and useful commands
+- ``git help <command>`` for additional info about a specific command
+- ``man git`` - because reading man-pages is always a good thing :)
 - In your terminal type ``man gittutorial`` for a good tutorial which also emphazises more the 'collaboration' part compared to this guide.
 - Google for "git workflows" for more information about different ways to use git in a team
-- Explore the ``.git`` folder and the files in here to get a more in depth understanding of how git keeps track of the current state
-
-
-# TODO
-
-# aliases
-alias.lg log --format='%Cred %h %Cblue %<(12,trunc)%an %cd %Creset %s'
-alias.lgg log --format='%Cred %h %Cblue %<(12,trunc)%an %Creset %s' --graph
-alias.lgga log --format='%Cred %<(5,trunc)%h %Creset %s %d' --graph --all
-alias.lgmf log --name-status --reverse --pretty='%Cred%an %h %s %Cgreen'
-alias.dfiles diff --name-only
-alias.co checkout
-alias.br branch
-alias.st status
-alias.alias config --get-regexp ^alias\.
-alias.showfiles diff-tree --no-commit-id --name-only -r
+- Explore the ``.git`` folder and the files in here to get a more in depth understanding of how git keeps track of the current state.
