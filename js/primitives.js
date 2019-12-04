@@ -20,3 +20,48 @@ These six types are considered to be primitives:
 
 A primitive is not an object. All primitives are immutable.
 */
+
+let x;
+
+// undefined
+logType({x});
+
+//boolean
+x = true;
+logType({x});
+
+//string
+x = "hello";
+logType({x});
+
+// number
+x = 5;
+logType({x});
+x = 1.2;
+logType( {x});
+
+
+// arrays are objects
+let cars = ["Saab", "Volvo", "BMW"];
+logType({cars});
+
+console.log("undefined is of type " + typeof undefined);
+console.log("null is of type " + typeof null);
+
+console.log(null === undefined);     // false
+console.log(null == undefined);       // true 
+
+
+
+
+ /** ====================== utily ====================== */
+ function section(title) {
+    console.log("----------------------------------------------------------------");
+    console.log(title);
+    console.log("----------------------------------------------------------------");
+}
+
+function logType(x) {
+    let name = Object.keys(x)[0];
+    console.log(`var ${name} with value ${x[name]} is of type ${typeof x}`);
+}
