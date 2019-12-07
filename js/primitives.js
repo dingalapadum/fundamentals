@@ -11,11 +11,13 @@
 /**
 These six types are considered to be primitives:
 
-    Boolean — true or false
-    Null — no value
+    
     Undefined — a declared variable but hasn’t been given a value
-    Number — integers, floats, etc
+    Boolean — true or false
     String — an array of characters i.e words
+    Number — integers, floats, etc
+    Null — no value but is actually of type Object
+    
     Symbol — a unique value that's not equal to any other value
 
 A primitive is not an object. All primitives are immutable.
@@ -38,7 +40,14 @@ logType({x});
 x = 5;
 logType({x});
 x = 1.2;
-logType( {x});
+logType({x});
+
+// null
+x = null;
+logType({x});
+
+console.log(null === undefined);     // false
+console.log(null == undefined);       // true 
 
 
 // arrays are objects
@@ -48,8 +57,7 @@ logType({cars});
 console.log("undefined is of type " + typeof undefined);
 console.log("null is of type " + typeof null);
 
-console.log(null === undefined);     // false
-console.log(null == undefined);       // true 
+
 
 
 

@@ -1,4 +1,5 @@
-- IN PROGRESS: primitive Datatypes: TODO: read http://hepunx.rl.ac.uk/~adye/jsspec11/builtin.htm
+- primitive Datatypes: IN PROGRESS
+- built-in methods TODO: read http://hepunx.rl.ac.uk/~adye/jsspec11/builtin.htm
 - complex Datatypes
 - Objects
 - Arrays, Indexed collections
@@ -14,5 +15,4 @@
 - rest parameters
 - this
 - DOM
-- built-in methods
 - modules, imports
