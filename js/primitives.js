@@ -63,5 +63,5 @@ console.log("null is of type " + typeof null);
 /** ====================== utily ====================== */
 function logType(x) {
     let name = Object.keys(x)[0];
-    console.log(`var ${name} with value ${x[name]} is of type ${typeof x}`);
+    console.log(`var ${name} with value ${x[name]} is of type ${typeof x[name]}`);
 }
