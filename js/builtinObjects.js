@@ -2,7 +2,10 @@
  * Built in Objects
  * ================
  * 
+ * - Some of the built in objects are the 'object'-counterpart of a primitive type
+ * 
  * These examples are inspired or come from: 
+ * http://hepunx.rl.ac.uk/~adye/jsspec11/builtin.htm
  * 
  * run this file using 'node builtinObjects.js'
  * 
@@ -13,7 +16,7 @@
  * - Object
  * - elements of an array do not neccessarily have the same type.
  * */
-section("Array Object")
+section("Array Object");
 
 /**
  * Constructors
@@ -107,6 +110,65 @@ console.log(a);
 console.log(" by age");
 a.sort((x1, x2) => x1.age - x2.age);
 console.log(a)
+
+
+
+
+
+
+
+/**
+ * Boolean Object
+ * ==============
+ * - has no properties
+ * */
+section("Boolean Object");
+/**
+ * Constructors
+ * ------------
+ */
+subSection("Constructors");
+
+// all these yield false
+let u=new Boolean(false);
+logType({u});
+u=new Boolean();
+logType({u});
+u=new Boolean(null);
+logType({u});
+u=new Boolean(undefined);
+logType({u});
+u=new Boolean(0);
+logType({u});
+
+// everything else is true
+u= new Boolean(true);
+logType({u});
+u=new Boolean(-1);
+logType({u});
+u=new Boolean("hello");
+logType({u});
+
+
+/**
+ * Methods
+ * -------
+ * - The Array object has two methods:
+ * - toString 
+ * - valueOf 
+ * */
+subSection("Methods");
+// toString is kinda obvious
+console.log(u);
+console.log(u.toString());
+
+// valueOf returns the corresponding primitve boolean
+console.log(u===true);
+console.log(u.valueOf()===true);
+// note that == would always return true for these
+
+
+
 
 /** ====================== utily ====================== */
 function section(title) {
