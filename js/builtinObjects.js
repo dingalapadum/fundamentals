@@ -116,7 +116,9 @@ console.log(a)
 
 
 
-
+console.log();
+console.log();
+console.log();
 /**
  * Boolean Object
  * ==============
@@ -173,9 +175,9 @@ console.log(u.valueOf()===true);
 
 
 
-
-
-
+console.log();
+console.log();
+console.log();
 /**
  * Date Object
  * ===========
@@ -184,6 +186,8 @@ console.log(u.valueOf()===true);
  *   and those six components, as well as the day of the week, may be extracted from a date. 
  * - Dates may be compared and converted to a readable string form. 
  * - A Date is represented to a precision of one millisecond. 
+ * - Dates as Strings are according to IETF https://tools.ietf.org/rfc/rfc3339.txt (Internet Engineering Task Force)
+ * - See also: ISO 8601 
  * */
 section("Date Object");
 /**
@@ -207,6 +211,55 @@ new Date(year, month, day, hours, minutes)
 new Date(year, month, day, hours)
 new Date(IntegerLiteral)
 */
+
+
+
+/**
+ * Methods
+ * -------
+ * - now (sinceECMAScript 5). parse and UTC are static methods
+ * */
+subSection("Methods");
+ //parse
+ date.setTime(Date.parse("Aug 9, 1995"));
+ console.log(date.toString());
+
+ // note that
+ let dateInMillis = Date.parse("Aug 9, 1995"); // time in millis!
+ console.log(dateInMillis + " millis since epoch");
+date = new Date(dateInMillis);
+console.log(date.toLocaleDateString());
+
+// setDate sets the day of the month
+console.log("\nSetting day of 'Aug 9, 1995' to 15");
+date.setTime(Date.parse("Aug 9, 1995"));
+date.setDate(15);
+console.log("As String: " + date.toString());
+
+// toGMTString 'basically pretty print'
+console.log("As GMT String: " + date.toGMTString());
+
+// toGMTString 'basically pretty print'
+console.log("As Locale String: " + date.toLocaleString());
+
+/* These should be more or less clear:
+getFullYear 	Get the year as a four digit number (yyyy)
+getMonth 	Get the month as a number (0-11)
+getDate 	Get the day as a number (1-31)
+getHours 	Get the hour (0-23)
+getMinutes 	Get the minute (0-59)
+getSeconds 	Get the second (0-59)
+getMilliseconds 	Get the millisecond (0-999)
+getTime 	Get the time (milliseconds since January 1, 1970)
+getDay 	    Get the weekday as a number (0-6)
+setHours
+setMinutes
+setMonth
+setSeconds
+setTime
+setYear
+ */
+
 
 /** ====================== utily ====================== */
 function section(title) {
