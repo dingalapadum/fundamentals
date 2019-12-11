@@ -170,6 +170,44 @@ console.log(u.valueOf()===true);
 
 
 
+
+
+
+
+
+
+/**
+ * Date Object
+ * ===========
+ * - The Date object provides a system-independent abstraction of dates and times. 
+ * - Dates may be constructed from a year, month, day of the month, hour, minute, and second, 
+ *   and those six components, as well as the day of the week, may be extracted from a date. 
+ * - Dates may be compared and converted to a readable string form. 
+ * - A Date is represented to a precision of one millisecond. 
+ * */
+section("Date Object");
+/**
+ * Constructors
+ * ------------
+ */
+subSection("Constructors");
+let date = new Date();
+
+console.log("In Greenwich it is:")
+console.log(date);
+
+console.log("\nBut here it is (you even get the location!):")
+console.log(date.toString());
+/*
+Other constructors are (won't use them all here)
+new Date(StringDate)
+new Date(year, month, day)
+new Date(year, month, day, hours, minutes, seconds)
+new Date(year, month, day, hours, minutes)
+new Date(year, month, day, hours)
+new Date(IntegerLiteral)
+*/
+
 /** ====================== utily ====================== */
 function section(title) {
     console.log("================================================================");
