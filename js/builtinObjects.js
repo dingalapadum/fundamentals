@@ -9,6 +9,13 @@
  * 
  * run this file using 'node builtinObjects.js'
  * 
+ * 
+ * Content:
+ * - Array Object
+ * - Date Object
+ * - Boolean Object
+ * - Math Object
+ * - String Object
  ####################################################################### */
 /**
  * Array Object
@@ -115,7 +122,7 @@ console.log(a)
 
 
 
-
+//===================================================================================================
 console.log();
 console.log();
 console.log();
@@ -174,7 +181,7 @@ console.log(u.valueOf()===true);
 
 
 
-
+//===================================================================================================
 console.log();
 console.log();
 console.log();
@@ -260,6 +267,28 @@ setTime
 setYear
  */
 
+
+
+
+
+//===================================================================================================
+console.log();
+console.log();
+console.log();
+/**
+ * Math Object
+ * ===========
+ * */
+section("Math Object");
+/**
+ * Constructors
+ * ------------
+ */
+subSection("Constructors");
+/**
+ * Methods
+ * -------
+ * */
 
 /** ====================== utily ====================== */
 function section(title) {
