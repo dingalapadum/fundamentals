@@ -122,10 +122,8 @@ console.log(a)
 
 
 
+
 //===================================================================================================
-console.log();
-console.log();
-console.log();
 /**
  * Boolean Object
  * ==============
@@ -182,9 +180,6 @@ console.log(u.valueOf()===true);
 
 
 //===================================================================================================
-console.log();
-console.log();
-console.log();
 /**
  * Date Object
  * ===========
@@ -272,9 +267,6 @@ setYear
 
 
 //===================================================================================================
-console.log();
-console.log();
-console.log();
 /**
  * Math Object
  * ===========
@@ -292,12 +284,21 @@ subSection("Constructors");
 
 /** ====================== utily ====================== */
 function section(title) {
+    console.log();
+    console.log();
+    console.log();
+    console.log();
+    console.log();
+    console.log();
+    console.log();
     console.log("================================================================");
     console.log(title);
     console.log("================================================================");
 }
 
 function subSection(title) {
+    console.log();
+    console.log();
     console.log("----------------------------------------------------------------");
     console.log(title);
     console.log("----------------------------------------------------------------");
