@@ -61,7 +61,7 @@ console.log(matrix);
 try {
     let error = new Array(-1);
 }catch(e){
-    console.log("Negative length init raised an exception:");
+    console.log("'let error = new Array(-1);' Negative length init raised an exception:");
     console.log(e)
 }
 
@@ -76,6 +76,19 @@ try {
 subSection("Methods");
 console.log("in this section we will work with the array 'a':");
 a=[1, 2, 3, 4, 5];
+console.log(a);
+console.log();
+
+// push
+console.log(" => push() an element (6) into an array");
+a.push(6);
+console.log(a);
+console.log();
+
+// pop
+console.log(" => pop() an element");
+console.log("we get: " + a.pop());
+console.log(" and 'a' is now:");
 console.log(a);
 console.log();
 
@@ -102,7 +115,7 @@ console.log(sorter);
 sorter=a.sort();
 console.log(a);
 
-console.log(" => you can also pass a custom comparator (should return a number");
+console.log(" => you can also pass a custom comparator (it should return a number)");
 
 p1 = {name: "p1", age: 20};
 p2 = {name: "p2", age: 21};
@@ -112,7 +125,7 @@ p5 = {name: "p5", age: 41};
 p6 = {name: "p6", age: 19};
 
 a=new Array(p1, p2, p3,p4,p5,p6);
-console.log("for instance these persons by age");
+console.log("for instance lets sort these persons");
 console.log(a);
 console.log(" by age");
 a.sort((x1, x2) => x1.age - x2.age);
