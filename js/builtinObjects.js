@@ -31,15 +31,15 @@ section("Array Object");
  */
 subSection("Constructors");
 // constructors
-let empty=new Array();
+let empty = new Array();
 console.log(empty);
 
-let a5=new Array(5);
+let a5 = new Array(5);
 console.log(a5);
-a5[3]='d';
+a5[3] = 'd';
 console.log(a5);
 
-a5[8]='x'; // a5 gets resized automatically
+a5[8] = 'x'; // a5 gets resized automatically
 console.log(a5);
 
 // An Array object has one property: length.
@@ -50,19 +50,21 @@ console.log(a5);
 console.log(a5[2]); // undefined
 
 
-let a=new Array(1,2,3,4);
+let a = new Array(1, 2, 3, 4);
 console.log(a);
-let b=new Array(5,6,7,8);
+let b = new Array(5, 6, 7, 8);
 console.log(b);
-let matrix=new Array(a, b);
+let matrix = new Array(a, b);
 console.log(matrix);
 
 // An arrayLength specified to be zero or less results in a run-time error
+let error;
 try {
-    let error = new Array(-1);
-}catch(e){
+    error = new Array(-1);
+    console.log(error);
+} catch (e) {
     console.log("'let error = new Array(-1);' Negative length init raised an exception:");
-    console.log(e)
+    console.log(e);
 }
 
 /**
@@ -75,7 +77,7 @@ try {
  * */
 subSection("Methods");
 console.log("in this section we will work with the array 'a':");
-a=[1, 2, 3, 4, 5];
+a = [1, 2, 3, 4, 5];
 console.log(a);
 console.log();
 
@@ -94,14 +96,16 @@ console.log();
 
 // join
 console.log(" => join() returns a string with the given separator between the elemets");
-let joiner =  a.join("/");
-console.log(joiner)
-logType({joiner});
+let joiner = a.join("/");
+console.log(joiner);
+logType({
+    joiner
+});
 console.log();
 
 // reverse
 console.log(" => reverse() it reverses the array we call the mehtod on - and returns a pointer to the array we call the method on");
-let reverser=a.reverse();
+let reverser = a.reverse();
 console.log(reverser);
 console.log(a);
 console.log();
@@ -109,27 +113,45 @@ console.log();
 // sort
 console.log(" => sort() sorts the array we call the mehtod on - and returns a pointer to the array we call the method on");
 //arrayName.sort(compareFunction)
-let sorter=a.sort();
+let sorter = a.sort();
 console.log(sorter);
 
-sorter=a.sort();
+sorter = a.sort();
 console.log(a);
 
 console.log(" => you can also pass a custom comparator (it should return a number)");
 
-p1 = {name: "p1", age: 20};
-p2 = {name: "p2", age: 21};
-p3 = {name: "p3", age: 24};
-p4 = {name: "p4", age: 11};
-p5 = {name: "p5", age: 41};
-p6 = {name: "p6", age: 19};
+let p1 = {
+    name: "p1",
+    age: 20
+};
+let p2 = {
+    name: "p2",
+    age: 21
+};
+let p3 = {
+    name: "p3",
+    age: 24
+};
+let p4 = {
+    name: "p4",
+    age: 11
+};
+let p5 = {
+    name: "p5",
+    age: 41
+};
+let p6 = {
+    name: "p6",
+    age: 19
+};
 
-a=new Array(p1, p2, p3,p4,p5,p6);
+a = new Array(p1, p2, p3, p4, p5, p6);
 console.log("for instance lets sort these persons");
 console.log(a);
 console.log(" by age");
 a.sort((x1, x2) => x1.age - x2.age);
-console.log(a)
+console.log(a);
 
 
 
@@ -150,24 +172,45 @@ section("Boolean Object");
 subSection("Constructors");
 
 // all these yield false
-let u=new Boolean(false);
-logType({u});
-u=new Boolean();
-logType({u});
-u=new Boolean(null);
-logType({u});
-u=new Boolean(undefined);
-logType({u});
-u=new Boolean(0);
-logType({u});
+let u = new Boolean(false);
+logType({
+    u
+});
+u = new Boolean();
+logType({
+    u
+});
+u = new Boolean(null);
+logType({
+    u
+});
+u = new Boolean(undefined);
+logType({
+    u
+});
+u = new Boolean(0);
+logType({
+    u
+});
 
 // everything else is true
-u= new Boolean(true);
-logType({u});
-u=new Boolean(-1);
-logType({u});
-u=new Boolean("hello");
-logType({u});
+u = new Boolean(true);
+logType({
+    u
+});
+u = new Boolean(-1);
+logType({
+    u
+});
+u = new Boolean("hello");
+logType({
+    u
+});
+u = true;
+logType({
+    u
+});
+
 
 
 /**
@@ -183,8 +226,8 @@ console.log(u);
 console.log(u.toString());
 
 // valueOf returns the corresponding primitve boolean
-console.log(u===true);
-console.log(u.valueOf()===true);
+console.log(u === true);
+console.log(u.valueOf() === true);
 // note that == would always return true for these
 
 
@@ -212,10 +255,10 @@ section("Date Object");
 subSection("Constructors");
 let date = new Date();
 
-console.log("In Greenwich it is:")
+console.log("In Greenwich it is:");
 console.log(date);
 
-console.log("\nBut here it is (you even get the location!):")
+console.log("\nBut here it is (you even get the location!):");
 console.log(date.toString());
 /*
 Other constructors are (won't use them all here)
@@ -235,13 +278,13 @@ new Date(IntegerLiteral)
  * - now (sinceECMAScript 5). parse and UTC are static methods
  * */
 subSection("Methods");
- //parse
- date.setTime(Date.parse("Aug 9, 1995"));
- console.log(date.toString());
+//parse
+date.setTime(Date.parse("Aug 9, 1995"));
+console.log(date.toString());
 
- // note that
- let dateInMillis = Date.parse("Aug 9, 1995"); // time in millis!
- console.log(dateInMillis + " millis since epoch");
+// note that
+let dateInMillis = Date.parse("Aug 9, 1995"); // time in millis!
+console.log(dateInMillis + " millis since epoch");
 date = new Date(dateInMillis);
 console.log(date.toLocaleDateString());
 
@@ -295,7 +338,7 @@ subSection("Constructors");
  * -------
  * */
 
-/** ====================== utily ====================== */
+/** ====================== utility ====================== */
 function section(title) {
     console.log();
     console.log();
