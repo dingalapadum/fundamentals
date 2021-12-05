@@ -210,7 +210,7 @@ The ``checkout`` command is overloaded and can also be used to 'jump' to a speci
 The remainder of this inroduction is not so much a tutorial anymore, but rather a collection of some recurring tasks I found myself googling for over and over again - this is the part which is more cheatsheet than tutorial
 
 ## Accepting changes from the master ("updating your branch")
-So you are working on some feature-branch and you know what to get the changes from master into your branch without a merge commit, but basically moving the diverging commit to the top of master - this will then allow to merge your pull-request into master via fast-forward
+So you are working on some feature-branch and you want to get the changes from master into your branch without a merge commit, but basically moving the commits from your branch to the top of master - this will then allow to merge your pull-request into master via fast-forward
 
 ```
 # accept changes from master
