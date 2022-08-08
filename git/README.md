@@ -180,7 +180,7 @@ Expand this for some addtional information on HEAD
 </summary>
 
 After commiting, the ``HEAD`` will move along and reference the new commit.
-The ``HEAD`` follows (is attached to) the branch we are working on and we can use it to reference commits _relative_ to our current position. It is also possibke to detach the ``HEAD`` from any branch and creating the branch later.
+The ``HEAD`` follows (is attached to) the branch we are working on and we can use it to reference commits _relative_ to our current position. It is also possible to detach the ``HEAD`` from any branch and creating the branch later.
 </details>
 
 
