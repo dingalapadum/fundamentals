@@ -9,7 +9,7 @@ Git is a version control system (vcs). The purpose of a version control system i
 ## Initalize git repository
 ```
     git init
-# You will get a folder .git/which contains all the data that git uses to function. Among those there is configfile.
+# You will get a folder .git/ which contains all the data that git uses to function. Among those there is a configfile.
 ```
 <hr>
 
