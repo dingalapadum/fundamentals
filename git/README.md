@@ -282,25 +282,25 @@ You can see your aliases in your ``.gitconfig`` and of course you can just write
 
 ```
 [alias]
-    # short common commands (these are widely used)
-    alias.co checkout
-    alias.br branch
-    alias.st status
+        # short common commands (these are widely used)
+        co = checkout
+        br = branch
+        st = status
 
-    # different log pretty printers
-    alias.lg log --format='%Cred %h %Cblue %<(12,trunc)%an %cd %Creset %s'
-    alias.lgg log --format='%Cred %h %Cblue %<(12,trunc)%an %Creset %s' --graph
-    alias.lgga log --format='%Cred %<(5,trunc)%h %Creset %s %d' --graph --all
-    alias.lgmf log --name-status --reverse --pretty='%Cred%an %h %s %Cgreen'
-    
-    # like "git diff" but only showing filenames
-    alias.dfiles diff --name-only
+        # different log pretty printers
+        lg = "log --format='%Cred %h %Cblue %<(12,trunc)%an %cd %Creset %s'"
+        lgg = "log --format='%Cred %h %Cblue %<(12,trunc)%an %Creset %s' --graph"
+        lgga = "log --format='%Cred %<(5,trunc)%h %Creset %s %d' --graph --all"
+        lgmf = "log --name-status --reverse --pretty='%Cred%an %h %s %Cgreen'"
 
-    # show all available aliases
-    alias.alias config --get-regexp ^alias\.
+        # like "git diff" but only showing filenames
+        dfiles = "diff --name-only"
 
-    # like "git show" but only
-    alias.showfiles diff-tree --no-commit-id --name-only -r
+        # show all available aliases
+        alias = "config --get-regexp '^alias\\.'"
+
+        # like "git show" but only show the files that where modified without other details
+        showfiles = "diff-tree --no-commit-id --name-only -r"
 ```
 
 <hr>
